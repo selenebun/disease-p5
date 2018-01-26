@@ -40,20 +40,21 @@ class Particle {
     }
 
     draw() {
-        fill(COLORS[this.state]);
         noStroke();
-        ellipseMode(RADIUS)
+        //fill(255, 255, 255, 31);
+        ellipseMode(RADIUS);
+        //ellipse(this.pos.x, this.pos.y, SPREAD, SPREAD);
+        fill(COLORS[this.state]);
         ellipse(this.pos.x, this.pos.y, P_RADIUS, P_RADIUS);
     }
 
     // Infect nearby particles
     infect() {
-        // Find all particles within spreadRange
-        let inRange = [];
+        // Find all particles within spread range and infect
         for (let i = 0; i < particles.length; i++) {
             let e = particles[i];
             if (inCircle(e.pos.x, e.pos.y, this.pos.x, this.pos.y, SPREAD)) {
-                inRange.push(e);
+                if (e.state === 0 && random() < INFECT_CHANCE) e.state = 1;
             }
         }
     }

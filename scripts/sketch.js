@@ -4,16 +4,16 @@ const COLORS = [
     [213, 0, 0],            // infected
     [85, 139, 47],          // recovered
 ];
-const P_RADIUS = 12;        // particle radius
+const P_RADIUS = 8;        // particle radius
 
 var particles;
 
 var INFECT_CHANCE = 0.1;    // chance for an entity to become infected
-var SPREAD = 20;            // radius within which entities can be infected
+var SPREAD = 24;            // radius within which entities can be infected
 var TRANSITIONS = [
-    0.2,                    // exposed      -> infected
-    0.01,                   // infected     -> recovered
-    0.01                    // recovered    -> susceptible
+    1,                      // exposed      -> infected
+    0.005,                  // infected     -> recovered
+    0                       // recovered    -> susceptible
 ];
 
 
@@ -44,7 +44,7 @@ function randomParticles(states) {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    randomParticles([99, 0, 1, 0]);
+    randomParticles([199, 0, 1, 0]);
 }
 
 function draw() {
