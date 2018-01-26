@@ -8,13 +8,15 @@ const P_RADIUS = 8;        // particle radius
 
 var particles;
 
-var INFECT_CHANCE = 0.1;    // chance for an entity to become infected
-var SPREAD = 24;            // radius within which entities can be infected
+var I_CHANCE = 0.1;         // chance for an entity to become infected
+var I_RADIUS = 24;          // radius within which entities can be infected
 var TRANSITIONS = [
     1,                      // exposed      -> infected
     0.005,                  // infected     -> recovered
     0                       // recovered    -> susceptible
 ];
+
+var showRadius = false;     // whether to display infection radius
 
 
 
@@ -38,6 +40,8 @@ function randomParticles(states) {
 }
 
 
+
+
 /*
  * Main p5.js functions
  */
@@ -52,5 +56,25 @@ function draw() {
 
     for (let i = 0; i < particles.length; i++) {
         particles[i].act();
+    }
+}
+
+
+
+
+/*
+ * User input
+ */
+
+function keyPressed() {
+    switch (keyCode) {
+        case 32:
+            // Spacebar
+            showRadius = !showRadius;
+            break;
+        case 82:
+            // R
+            randomParticles([199, 0, 1, 0]);
+            break;
     }
 }

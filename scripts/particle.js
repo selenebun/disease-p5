@@ -41,9 +41,11 @@ class Particle {
 
     draw() {
         noStroke();
-        //fill(255, 255, 255, 31);
         ellipseMode(RADIUS);
-        //ellipse(this.pos.x, this.pos.y, SPREAD, SPREAD);
+        if (showRadius) {
+            fill(255, 255, 255, 31);
+            ellipse(this.pos.x, this.pos.y, I_RADIUS, I_RADIUS);
+        }
         fill(COLORS[this.state]);
         ellipse(this.pos.x, this.pos.y, P_RADIUS, P_RADIUS);
     }
@@ -53,8 +55,8 @@ class Particle {
         // Find all particles within spread range and infect
         for (let i = 0; i < particles.length; i++) {
             let e = particles[i];
-            if (inCircle(e.pos.x, e.pos.y, this.pos.x, this.pos.y, SPREAD)) {
-                if (e.state === 0 && random() < INFECT_CHANCE) e.state = 1;
+            if (inCircle(e.pos.x, e.pos.y, this.pos.x, this.pos.y, I_RADIUS)) {
+                if (e.state === 0 && random() < I_CHANCE) e.state = 1;
             }
         }
     }
