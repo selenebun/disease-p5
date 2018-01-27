@@ -3,5 +3,6 @@ A simple disease spread simulation in p5.js. It can be played [here](https://xit
 
 ### Controls
 * Spacebar to toggle showing infection radius
+* F to toggle fade
 * G to toggle showing the pie chart
 * R to reset the simulation

@@ -17,6 +17,7 @@ var TRANSITIONS = [
 ];
 
 var showChart = true;       // whether to display pie chart
+var showFade = false;       // whether to do a fading effect
 var showRadius = false;     // whether to display infection radius
 
 
@@ -108,7 +109,7 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    showFade ? background(0, 63) : background(0);
 
     for (let i = 0; i < entities.length; i++) {
         entities[i].act();
@@ -129,6 +130,10 @@ function keyPressed() {
         case 32:
             // Spacebar
             showRadius = !showRadius;
+            break;
+        case 70:
+            // F
+            showFade = !showFade;
             break;
         case 71:
             // G
