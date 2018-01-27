@@ -118,7 +118,8 @@ function reset() {
         let v = parseFloat(document.getElementById(ids[i]).value);
         t.push(constrain(v, 0, 1));
     }
-    INFECT_CHANCE = t.shift();
+    console.log(t);
+    I_CHANCE = t.shift();
     TRANSITIONS = t;
 }
 
