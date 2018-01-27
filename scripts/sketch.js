@@ -4,9 +4,9 @@ const COLORS = [
     [213, 0, 0],            // infected
     [85, 139, 47],          // recovered
 ];
-var P_RADIUS = 8;           // particle radius
+var E_RADIUS = 8;           // particle radius
 
-var particles;
+var entities;
 
 var I_CHANCE = 0.1;         // chance for an entity to become infected
 var I_RADIUS = 24;          // radius within which entities can be infected
@@ -28,7 +28,7 @@ var showRadius = false;     // whether to display infection radius
 
 // Draws a pie chart of all entities
 function pieChart() {
-    let results = countStates(particles);
+    let results = countStates(entities);
     let states = results[0];
     let total = results[1];
 
@@ -48,24 +48,24 @@ function pieChart() {
     }
 }
 
-// Fills map randomly with particles of each state
+// Fills map randomly with entities of each state
 // Requires an array of SEIR
-function randomParticles(states) {
-    particles = [];
+function randomEntities(states) {
+    entities = [];
     for (let i = 0; i < states.length; i++) {
         for (let j = 0; j < states[i]; j++) {
             let x = random(width);
             let y = random(height);
-            particles.push(new Particle(x, y, i));
+            entities.push(new Entity(x, y, i));
         }
     }
 }
 
 // Resets map
 function reset() {
-    // Set particle radius
-    let p = parseInt(document.getElementById('p_r').value);
-    P_RADIUS = p > 0 ? p : 1;
+    // Set entity radius
+    let e = parseInt(document.getElementById('e_r').value);
+    E_RADIUS = e > 0 ? e : 1;
 
     // Set infection radius
     let r = parseInt(document.getElementById('i_r').value);
@@ -78,7 +78,7 @@ function reset() {
         let v = parseInt(document.getElementById(ids[i]).value);
         population.push(v >= 0 ? v : 0);
     }
-    randomParticles(population);
+    randomEntities(population);
 
     // Set transitions
     ids = ['ds', 'de', 'di', 'dr'];
@@ -110,8 +110,8 @@ function setup() {
 function draw() {
     background(0);
 
-    for (let i = 0; i < particles.length; i++) {
-        particles[i].act();
+    for (let i = 0; i < entities.length; i++) {
+        entities[i].act();
     }
 
     if (showChart) pieChart();

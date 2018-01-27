@@ -1,4 +1,4 @@
-class Particle {
+class Entity {
     constructor(x, y, state) {
         // Misc
         this.state = state;
@@ -21,20 +21,20 @@ class Particle {
 
     // Bounce off walls
     bounce() {
-        if (this.pos.x - P_RADIUS < 0) {
-            this.pos.x = P_RADIUS;
+        if (this.pos.x - E_RADIUS < 0) {
+            this.pos.x = E_RADIUS;
             this.vel.x *= -1;
         }
-        if (this.pos.x + P_RADIUS > width) {
-            this.pos.x = width - P_RADIUS;
+        if (this.pos.x + E_RADIUS > width) {
+            this.pos.x = width - E_RADIUS;
             this.vel.x *= -1;
         }
-        if (this.pos.y - P_RADIUS < 0) {
-            this.pos.y = P_RADIUS;
+        if (this.pos.y - E_RADIUS < 0) {
+            this.pos.y = E_RADIUS;
             this.vel.y *= -1;
         }
-        if (this.pos.y + P_RADIUS > height) {
-            this.pos.y = height - P_RADIUS;
+        if (this.pos.y + E_RADIUS > height) {
+            this.pos.y = height - E_RADIUS;
             this.vel.y *= -1;
         }
     }
@@ -47,14 +47,14 @@ class Particle {
             ellipse(this.pos.x, this.pos.y, I_RADIUS, I_RADIUS);
         }
         fill(COLORS[this.state]);
-        ellipse(this.pos.x, this.pos.y, P_RADIUS, P_RADIUS);
+        ellipse(this.pos.x, this.pos.y, E_RADIUS, E_RADIUS);
     }
 
-    // Infect nearby particles
+    // Infect nearby entities
     infect() {
-        // Find all particles within spread range and infect
-        for (let i = 0; i < particles.length; i++) {
-            let e = particles[i];
+        // Find all entities within spread range and infect
+        for (let i = 0; i < entities.length; i++) {
+            let e = entities[i];
             if (inCircle(e.pos.x, e.pos.y, this.pos.x, this.pos.y, I_RADIUS)) {
                 if (e.state === 0 && random() < I_CHANCE) e.state = 1;
             }
