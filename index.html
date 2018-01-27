@@ -5,6 +5,7 @@
     <meta name="author" content="xithiox">
     <title>disease</title>
     <link href="style.css" rel="stylesheet">
+    <script src="scripts/lib/lz-string.min.js" defer></script>
     <script src="scripts/lib/p5.min.js" defer></script>
     <script src="scripts/utils.js" defer></script>
     <script src="scripts/entity.js" defer></script>
@@ -31,7 +32,11 @@
       <p>I&rarr;R: <input type="number" id="di" value="0.005" min="0" max="1" step="0.001"></p>
       <p>R&rarr;S: <input type="number" id="dr" value="0" min="0" max="1" step="0.001"></p>
 
-      <p><button onclick="reset()">Reset</button></p>
+      <p>
+        <button onclick="reset()">Reset</button>
+        <button onclick="importScenario(prompt('Input scenario string:'))">Import</button>
+        <button onclick="copyToClipboard(exportScenario())">Export</button>
+      </p>
     </aside>
   </body>
 </html>

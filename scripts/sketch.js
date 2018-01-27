@@ -7,6 +7,7 @@ const COLORS = [
 var E_RADIUS = 8;           // particle radius
 
 var entities;
+var population;
 
 var I_CHANCE = 0.1;         // chance for an entity to become infected
 var I_RADIUS = 24;          // radius within which entities can be infected
@@ -26,6 +27,35 @@ var showRadius = false;     // whether to display infection radius
 /*
  * Other functions
  */
+
+// Return scenario string
+function exportScenario() {
+    return LZString.compressToBase64(JSON.stringify({
+        e_radius: E_RADIUS,
+        i_radius: I_RADIUS,
+        i_chance: I_CHANCE,
+        transitions: TRANSITIONS,
+        population: population
+    }));
+}
+
+// Import scenario from a scenario string
+function importScenario(str) {
+    try {
+        let custom = JSON.parse(LZString.decompressFromBase64(str));
+        document.getElementById('e_r').value = custom.e_radius;
+        document.getElementById('i_r').value = custom.i_radius;
+        document.getElementById('ds').value = custom.i_chance;
+        document.getElementById('de').value = custom.transitions[0];
+        document.getElementById('di').value = custom.transitions[1];
+        document.getElementById('dr').value = custom.transitions[2];
+        document.getElementById('s0').value = custom.population[0];
+        document.getElementById('e0').value = custom.population[1];
+        document.getElementById('i0').value = custom.population[2];
+        document.getElementById('r0').value = custom.population[3];
+        reset();
+    } catch (err) {}
+}
 
 // Draws a pie chart of all entities
 function pieChart() {
@@ -74,7 +104,7 @@ function reset() {
 
     // Set initial population
     let ids = ['s0', 'e0', 'i0', 'r0'];
-    let population = [];
+    population = [];
     for (let i = 0; i < ids.length; i++) {
         let v = parseInt(document.getElementById(ids[i]).value);
         population.push(v >= 0 ? v : 0);
@@ -139,9 +169,17 @@ function keyPressed() {
             // G
             showChart = !showChart;
             break;
+        case 77:
+            // M
+            importScenario(prompt('Input scenario string:'));
+            break;
         case 82:
             // R
             reset();
+            break;
+        case 88:
+            // X
+            copyToClipboard(exportScenario());
             break;
     }
 }
