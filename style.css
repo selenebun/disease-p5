@@ -1,8 +1,68 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+/*
+ * Page structure
+ */
+
 html, body {
-    background-color: #000;
     margin: 0;
 }
 
+body {
+    background-color: #000;
+    color: #CCC;
+    display: flex;
+    flex-direction: row;
+    font-family: Courier, monospace;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+aside {
+    background-color: #263238;
+    max-height: 100vh;
+    overflow-y: scroll;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+
+
+
+/*
+ * Page content
+ */
+
 canvas {
     display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    text-align: center;
+}
+
+h1 {
+    color: #d50000;
+}
+
+h3 {
+    color: #FF8F00;
+}
+
+input {
+    width: 60px;
+}
+
+p {
+    text-align: center;
 }

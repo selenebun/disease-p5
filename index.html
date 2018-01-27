@@ -10,5 +10,28 @@
     <script src="scripts/particle.js" defer></script>
     <script src="scripts/sketch.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <main id="sketch"></main>
+    <aside>
+      <h1>Disease</h1>
+
+      <h3>Entity Radius</h3>
+      <p>Radius: <input type="number" id="p_r" value="8" min="0"></p>
+      <p>Infect: <input type="number" id="i_r" value="30" min="0"></p>
+
+      <h3>Population</h3>
+      <p>S<sub>0</sub>: <input type="number" id="s0" value="199" min="0"></p>
+      <p>E<sub>0</sub>: <input type="number" id="e0" value="0" min="0"></p>
+      <p>I<sub>0</sub>: <input type="number" id="i0" value="1" min="0"></p>
+      <p>R<sub>0</sub>: <input type="number" id="r0" value="0" min="0"></p>
+
+      <h3>Transitions</h3>
+      <p>S&rarr;E: <input type="number" id="ds" value="0.1" min="0" max="1" step="0.001"></p>
+      <p>E&rarr;I: <input type="number" id="de" value="1" min="0" max="1" step="0.001"></p>
+      <p>I&rarr;R: <input type="number" id="di" value="0.005" min="0" max="1" step="0.001"></p>
+      <p>R&rarr;S: <input type="number" id="dr" value="0" min="0" max="1" step="0.001"></p>
+
+      <p><button onclick="reset()">Reset</button></p>
+    </aside>
+  </body>
 </html>
