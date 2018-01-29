@@ -169,7 +169,7 @@ function setup() {
     
     reset();
 
-    maxHist = ceil(width / 3);
+    maxHist = ceil(width / 4);
 }
 
 function draw() {
