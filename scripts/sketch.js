@@ -22,7 +22,6 @@ var TRANSITIONS = [
 ];
 
 var graphType = 0;          // 0 = line graph, 1 = pie chart, 2 = none
-var showFade = false;       // whether to do a fading effect
 var showRadius = false;     // whether to display infection radius
 
 
@@ -174,7 +173,7 @@ function setup() {
 }
 
 function draw() {
-    showFade ? background(0, 63) : background(0);
+    background(0);
 
     hist.push(countStates()[0]);
     if (hist.length > maxHist) hist.shift();
@@ -202,10 +201,6 @@ function keyPressed() {
         case 32:
             // Spacebar
             showRadius = !showRadius;
-            break;
-        case 70:
-            // F
-            showFade = !showFade;
             break;
         case 71:
             // G

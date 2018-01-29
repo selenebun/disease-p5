@@ -37,6 +37,11 @@
         <button onclick="importScenario(prompt('Input scenario string:'))">Import</button>
         <button onclick="copyToClipboard(exportScenario())">Export</button>
       </p>
+
+      <p>
+        <button onclick="graphType++;if(graphType>2)graphType=0">Next Graph</button>
+        <button onclick="showRadius=!showRadius">Radius</button>
+      </p>
     </aside>
   </body>
 </html>
