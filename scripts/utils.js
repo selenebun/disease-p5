@@ -43,7 +43,7 @@ function copyToClipboard(text) {
 }
 
 // Count occurance of each state
-function countStates(entities) {
+function countStates() {
     let states = [0, 0, 0, 0];
     let total = 0;
     for (let i = 0; i < entities.length; i++) {

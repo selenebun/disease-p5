@@ -9,6 +9,10 @@ var E_RADIUS = 8;           // particle radius
 var entities;
 var population;
 
+var hist;
+var maxHist;
+var count;
+
 var I_CHANCE = 0.1;         // chance for an entity to become infected
 var I_RADIUS = 24;          // radius within which entities can be infected
 var TRANSITIONS = [
@@ -17,7 +21,7 @@ var TRANSITIONS = [
     0                       // recovered    -> susceptible
 ];
 
-var showChart = true;       // whether to display pie chart
+var graphType = 0;          // 0 = line graph, 1 = pie chart, 2 = none
 var showFade = false;       // whether to do a fading effect
 var showRadius = false;     // whether to display infection radius
 
@@ -57,9 +61,35 @@ function importScenario(str) {
     } catch (err) {}
 }
 
+// Draws a line graph of all entities
+function lineGraph() {
+    // Transparent rect behind graph
+    fill(0, 127);
+    noStroke();
+    rect(0, 25, hist.length, 150);
+
+    // Plot history of each state
+    noFill();
+    strokeWeight(2);
+    for (let i = 0; i < COLORS.length; i++) {
+        stroke(COLORS[i]);
+        beginShape();
+        for (let j = 0; j < hist.length; j++) {
+            let y = map(hist[j][i], 0, count, 175, 25);
+            vertex(j, y);
+        }
+        endShape();
+    }
+    strokeWeight(1);
+
+    // Draw line at current draw location
+    stroke(204);
+    line(hist.length, 25, hist.length, 175);
+}
+
 // Draws a pie chart of all entities
 function pieChart() {
-    let results = countStates(entities);
+    let results = countStates();
     let states = results[0];
     let total = results[1];
 
@@ -120,6 +150,9 @@ function reset() {
     }
     I_CHANCE = t.shift();
     TRANSITIONS = t;
+
+    hist = [];
+    count = countStates()[1];
 }
 
 
@@ -136,16 +169,25 @@ function setup() {
     resizeCanvas(m.offsetWidth, m.offsetHeight, true);
     
     reset();
+
+    maxHist = ceil(width / 3);
 }
 
 function draw() {
     showFade ? background(0, 63) : background(0);
 
+    hist.push(countStates()[0]);
+    if (hist.length > maxHist) hist.shift();
+
     for (let i = 0; i < entities.length; i++) {
         entities[i].act();
     }
 
-    if (showChart) pieChart();
+    if (graphType === 0) {
+        lineGraph();
+    } else if (graphType === 1) {
+        pieChart();
+    }
 }
 
 
@@ -167,7 +209,8 @@ function keyPressed() {
             break;
         case 71:
             // G
-            showChart = !showChart;
+            graphType++;
+            if (graphType > 2) graphType = 0;
             break;
         case 77:
             // M
