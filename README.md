@@ -1,5 +1,6 @@
-# disease
-A simple disease spread simulation in p5.js. It can be played [here](https://xithiox.github.io/disease/).
+# disease-p5
+A simple disease spread simulation in p5.js. It can be played
+[here](https://rsaihe.github.io/disease-p5).
 
 ### Controls
 * Spacebar to toggle showing infection radius
